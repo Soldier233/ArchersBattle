@@ -1,0 +1,8 @@
+name: ArchersBattle
+version: 1.0
+author: Soldier
+commands:
+  ab:
+    description: Main command of ArchersBattle
+  abadmin:
+    description: Admin command Of ArchersBattle
