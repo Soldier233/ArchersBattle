@@ -52,7 +52,11 @@ public class Arena
 	}
 	public void addPlayer(Player p)
 	{
-		players.add(p);
+		if(!checkPlayer(p))
+		{
+			players.add(p);	
+			Utils.fillInventory(p);
+		}
 	}
 	public boolean checkPlayer(Player p)
 	{
