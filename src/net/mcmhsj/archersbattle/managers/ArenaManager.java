@@ -24,16 +24,5 @@ public class ArenaManager {
 	{
 		arenas.remove(arena);
 	}
-	public static Arena getArena(String name)
-	{
-		Arena ar=null;
-		for(Arena a:arenas)
-		{
-			if(a.getWorldName().equalsIgnoreCase(name))
-			{
-				ar=a;
-			}
-		}
-		return ar;
-	}
+
 }

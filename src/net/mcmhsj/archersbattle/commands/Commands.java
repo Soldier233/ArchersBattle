@@ -6,8 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.mcmhsj.archersbattle.Arena;
-import net.mcmhsj.archersbattle.Utils;
 import net.mcmhsj.archersbattle.managers.ArenaManager;
+import net.mcmhsj.archersbattle.messages.Messages;
+import net.mcmhsj.archersbattle.utils.Utils;
 
 public class Commands implements CommandExecutor{
 	@Override
@@ -26,22 +27,22 @@ public class Commands implements CommandExecutor{
 				case "join":
 					if(Utils.isInArena(p))
 					{
-						p.sendMessage("§6§lArchersBattle §7>> §c你已经在一个游戏中了");
+						p.sendMessage(Messages.prefix+Messages.AlreadyInArena);
 					}
 					else
 					{
 						if(!args[1].equals(null))
 						{
 							String name=args[1];
-							if(ArenaManager.getArena(name)!=null)
+							if(Arena.valueOf(name)!=null)
 							{
-								Arena arena=ArenaManager.getArena(name);
+								Arena arena=Arena.valueOf(name);
 								arena.addPlayer(p);
-								p.sendMessage("§6§lArchersBattle §7>> §a成功加入竞技场"+name);
+								p.sendMessage((Messages.prefix+Messages.JoinedArena).replace("%arena%", arena.getWorldName()));
 							}
 							else
 							{
-								p.sendMessage("§6§lArchersBattle §7>> §c竞技场不存在");
+								p.sendMessage(Messages.prefix+Messages.AreanNotFound);
 							}
 						}
 					}

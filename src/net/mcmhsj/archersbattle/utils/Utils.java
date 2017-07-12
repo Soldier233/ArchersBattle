@@ -1,9 +1,10 @@
-package net.mcmhsj.archersbattle;
+package net.mcmhsj.archersbattle.utils;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import net.mcmhsj.archersbattle.Arena;
 import net.mcmhsj.archersbattle.managers.ArenaManager;
 import net.mcmhsj.archersbattle.managers.WeaponItemManager;
 

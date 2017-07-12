@@ -19,7 +19,7 @@ public class Database {
 		try
 		{
 			st=conn.createStatement();
-			st.executeUpdate("CREATE TABLE `ab_stats` (`name`  varchar(100) NOT NULL ,`kill`  varchar(100) NOT NULL ,`death`  varchar(100) NOT NULL ,`time`  varchar(100) NOT NULL ,PRIMARY KEY (`name`));");
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `ab_stats` (`name`  varchar(100) NOT NULL ,`kill`  varchar(100) NOT NULL ,`death`  varchar(100) NOT NULL ,`time`  varchar(100) NOT NULL ,PRIMARY KEY (`name`));");
 			success=true;
 		}
 		catch(Exception e)

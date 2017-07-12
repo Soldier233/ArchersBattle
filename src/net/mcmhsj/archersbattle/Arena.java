@@ -12,6 +12,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import net.mcmhsj.archersbattle.managers.ArenaManager;
+import net.mcmhsj.archersbattle.utils.Utils;
+
 public class Arena
 {
 	FileConfiguration file=new YamlConfiguration();
@@ -25,12 +28,16 @@ public class Arena
 		f=new File(Main.getInstance().getDataFolder()+"/arenas/",worldName+".yml");
 		if(!f.exists())
 		{
-			f.mkdir();
+			try {
+				f.mkdir();
+				BufferedWriter bw=new BufferedWriter(new FileWriter(f));
+				bw.newLine();
+				bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		try {
-			BufferedWriter bw=new BufferedWriter(new FileWriter(f));
-			bw.newLine();
-			bw.close();
 			file.load(f);
 			file.set("world", worldName);
 			file.save(f);
@@ -92,5 +99,31 @@ public class Arena
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public static Arena valueOf(String name)
+	{
+		Arena ar=null;
+		for(Arena a:ArenaManager.getArenas())
+		{
+			if(a.getWorldName().equalsIgnoreCase(name))
+			{
+				ar=a;
+				break;
+			}
+		}
+		return ar;
+	}
+	public static boolean containsArena(String name)
+	{
+		boolean contains=false;
+		for(Arena a:ArenaManager.getArenas())
+		{
+			if(a.getWorldName().equalsIgnoreCase(name))
+			{
+				contains=true;
+				break;
+			}
+		}
+		return contains;
 	}
 }

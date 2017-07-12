@@ -11,6 +11,7 @@ import org.bukkit.inventory.PlayerInventory;
 import net.mcmhsj.archersbattle.managers.ArenaManager;
 import net.mcmhsj.archersbattle.managers.KitItemManager;
 import net.mcmhsj.archersbattle.managers.WeaponItemManager;
+import net.mcmhsj.archersbattle.utils.Utils;
 
 public class InventoryListener implements Listener
 {
@@ -23,7 +24,7 @@ public class InventoryListener implements Listener
 		{
 			return;
 		}
-		if(!ArenaManager.getArena("ab").checkPlayer((Player)e.getWhoClicked()))
+		if(!Utils.isInArena((Player)e.getWhoClicked()))
 		{
 			return;
 		}
@@ -40,7 +41,7 @@ public class InventoryListener implements Listener
 		{
 			return;
 		}
-		if(!ArenaManager.getArena("ab").checkPlayer(e.getPlayer()))
+		if(!Utils.isInArena(e.getPlayer()))
 		{
 			return;
 		}

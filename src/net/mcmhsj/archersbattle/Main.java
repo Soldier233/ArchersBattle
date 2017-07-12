@@ -20,6 +20,7 @@ import net.mcmhsj.archersbattle.commands.Commands;
 import net.mcmhsj.archersbattle.managers.ArenaManager;
 import net.mcmhsj.archersbattle.managers.ConfigManager;
 import net.mcmhsj.archersbattle.managers.Database;
+import net.mcmhsj.archersbattle.managers.WeaponItemManager;
 
 public class Main extends JavaPlugin
 {
@@ -60,7 +61,8 @@ public class Main extends JavaPlugin
 		Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §a弓箭手大作战正在加载中..");
 		Bukkit.getPluginCommand("ab").setExecutor(new Commands());
 		Bukkit.getPluginCommand("abadmin").setExecutor(new AdminCommands());
-
+		WeaponItemManager.init();
+		new ConfigManager(this);
 		Database db=null;
 		try {
 			db=new Database(DriverManager.getConnection(ConfigManager.getConfigManager().getMySQLAddress(),

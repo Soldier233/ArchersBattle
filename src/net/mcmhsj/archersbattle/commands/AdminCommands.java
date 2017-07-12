@@ -21,7 +21,10 @@ public class AdminCommands implements CommandExecutor
 			case "create":
 				String worldName=args[1];
 				Arena arena=new Arena(worldName);
-				
+				if(Arena.containsArena(worldName))
+				{
+					sender.sendMessage("");
+				}
 				break;
 			default:
 				break;
