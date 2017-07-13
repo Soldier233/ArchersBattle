@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -20,8 +21,8 @@ public class Arena
 	FileConfiguration file=new YamlConfiguration();
 	File f;
 	String worldName;
-	List<Location> spawnLocations;
-	List<Player> players;
+	List<Location> spawnLocations=new ArrayList<Location>();
+	List<Player> players=new ArrayList<Player>();
 	public Arena(String worldName)
 	{
 		this.worldName=worldName;
@@ -72,6 +73,7 @@ public class Arena
 	public void removePlayer(Player p)
 	{
 		players.remove(p);
+		p.getInventory().clear();
 	}
 	public void setWorldName(String name)
 	{

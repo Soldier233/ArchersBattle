@@ -10,15 +10,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import net.mcmhsj.archersbattle.Main;
 
 public class Messages {
 	FileConfiguration config;
-	public static String prefix,AlreadyInArena,JoinedArena,AreanNotFound;
+	public static String prefix,NotInArena,LeavedArena,AlreadyInArena,JoinedArena,AreanNotFound,ArenaAlreadyExists,ArenaCreated;
 	public Messages()
 	{
 		File f=new File(Main.getInstance().getDataFolder(),"messages.yml");
+		config=new YamlConfiguration();
 		boolean first=!f.exists();
 		if(first)
 		{
@@ -26,10 +28,8 @@ public class Messages {
 				f.createNewFile();
 			} catch (Exception e) {e.printStackTrace();}
 		}
-		BufferedReader br=null;
 		try {
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(f),"UTF-8"));
-			config.load(br);
+			config.load(new InputStreamReader(new FileInputStream(f),"UTF-8"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,6 +39,10 @@ public class Messages {
 			config.set("commands.AlreadyInArena","§c你已经在一个游戏中了");
 			config.set("commands.JoinedArena","§a成功加入竞技场%arena%");
 			config.set("commands.AreanNotFound", "§c竞技场不存在");
+			config.set("commands.ArenaAlreadyExists", "§c竞技场已存在");
+			config.set("commands.ArenaCreated", "§a竞技场创建成功");
+			config.set("commands.NotInArena", "§c你不在竞技场中");
+			config.set("commands.LeavedArena", "§a成功退出了竞技场");
 			try {
 				config.save(f);
 			} catch (IOException e) {
@@ -49,5 +53,9 @@ public class Messages {
 		AlreadyInArena=config.getString("commands.AlreadyInArena");
 		JoinedArena=config.getString("commands.JoinedArena");
 		AreanNotFound=config.getString("commands.AreanNotFound");
+		ArenaAlreadyExists=config.getString("commands.ArenaAlreadyExists");
+		ArenaCreated=config.getString("commands.ArenaCreated");
+		NotInArena=config.getString("commands.NotInArena");
+		LeavedArena=config.getString("commands.LeavedArena");
 	}
 }

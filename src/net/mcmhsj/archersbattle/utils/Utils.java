@@ -10,6 +10,21 @@ import net.mcmhsj.archersbattle.managers.WeaponItemManager;
 
 public class Utils
 {
+	public static Arena getAreana(Player p)
+	{
+		Arena arena=null;
+		for(Arena a:ArenaManager.getArenas())
+		{
+			for(Player player:a.getPlayers())
+			{
+				if(player.getName().equalsIgnoreCase(p.getName()))
+				{
+					arena=a;
+				}
+			}
+		}
+		return arena;
+	}
 	public static boolean isInArena(Player p)
 	{
 		boolean in=false;
@@ -26,7 +41,7 @@ public class Utils
 	public static void fillInventory(Player p)
 	{
 		PlayerInventory inv=p.getInventory();
-		for(int i=0;i<=39;i++)
+		for(int i=0;i<=35;i++)
 		{
 			inv.setItem(i, WeaponItemManager.getForbidden(1));
 		}
@@ -36,5 +51,7 @@ public class Utils
 			inv.setItem(i, WeaponItemManager.getForbidden(i+1));
 		}
 		inv.setItem(9, WeaponItemManager.getArrow());
+		inv.setItem(0, WeaponItemManager.getBow());
+		p.updateInventory();
 	}
 }

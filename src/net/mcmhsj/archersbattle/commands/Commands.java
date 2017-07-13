@@ -47,6 +47,17 @@ public class Commands implements CommandExecutor{
 						}
 					}
 					break;
+				case "leave":
+					if(!Utils.isInArena(p))
+					{
+						p.sendMessage(Messages.prefix+Messages.NotInArena);
+					}
+					else
+					{
+						Arena arena=Utils.getAreana(p);
+						arena.removePlayer(p);
+						p.sendMessage(Messages.prefix+Messages.LeavedArena);
+					}
 				default:
 					break;
 				}
@@ -57,5 +68,6 @@ public class Commands implements CommandExecutor{
 	private void sendHelp(CommandSender sender)
 	{
 		sender.sendMessage("§a- /ab join <竞技场名> §6加入某个竞技场");
+		sender.sendMessage("§a- /ab leave §6离开竞技场");
 	}
 }
