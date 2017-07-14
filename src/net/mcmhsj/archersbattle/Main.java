@@ -20,9 +20,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.mcmhsj.archersbattle.commands.AdminCommands;
 import net.mcmhsj.archersbattle.commands.Commands;
-import net.mcmhsj.archersbattle.commands.inventory.InventoryListener;
-import net.mcmhsj.archersbattle.commands.inventory.PlayerListener;
-import net.mcmhsj.archersbattle.commands.inventory.WorldListener;
+import net.mcmhsj.archersbattle.listeners.InventoryListener;
+import net.mcmhsj.archersbattle.listeners.PlayerListener;
+import net.mcmhsj.archersbattle.listeners.WorldListener;
 import net.mcmhsj.archersbattle.managers.ArenaManager;
 import net.mcmhsj.archersbattle.managers.ConfigManager;
 import net.mcmhsj.archersbattle.managers.Database;

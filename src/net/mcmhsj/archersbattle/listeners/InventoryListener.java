@@ -1,4 +1,4 @@
-package net.mcmhsj.archersbattle.commands.inventory;
+package net.mcmhsj.archersbattle.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
