@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -14,6 +16,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import net.mcmhsj.archersbattle.managers.ArenaManager;
+import net.mcmhsj.archersbattle.messages.Messages;
 import net.mcmhsj.archersbattle.utils.Utils;
 
 public class Arena
@@ -64,6 +67,15 @@ public class Arena
 		{
 			players.add(p);	
 			Utils.fillInventory(p);
+			Location loc=getRandomSpawnLocation();
+			if(loc!=null)
+			{
+				p.teleport(loc);
+			}
+			else
+			{
+				p.sendMessage(Messages.prefix+Messages.SpawnLocationsNotFound);
+			}
 		}
 	}
 	public boolean checkPlayer(Player p)
@@ -95,7 +107,7 @@ public class Arena
 			for(Location loc:spawnLocations)
 			{
 				i++;
-				file.set("Locations."+i, loc);
+				file.set("loc"+i, loc);
 			}
 			file.save(f);
 		} catch (IOException e) {
@@ -127,5 +139,18 @@ public class Arena
 			}
 		}
 		return contains;
+	}
+	public Location getRandomSpawnLocation()
+	{
+		Random random=new Random();
+		if(spawnLocations.size()==0)
+		{
+			return null;
+		}
+		else
+		{
+			int index=random.nextInt(spawnLocations.size()+1);
+			return spawnLocations.get(index);
+		}
 	}
 }

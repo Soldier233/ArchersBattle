@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -63,6 +64,19 @@ public class InventoryListener implements Listener
 				inv.setItem(3,WeaponItemManager.getForbidden(4));
 				inv.setItem(4,WeaponItemManager.getForbidden(5));
 			}
+		}
+		e.setCancelled(true);
+	}
+	@EventHandler
+	public void onDrop(PlayerDropItemEvent e)
+	{
+		if(e.isCancelled())
+		{
+			return;
+		}
+		if(!Utils.isInArena(e.getPlayer()))
+		{
+			return;
 		}
 		e.setCancelled(true);
 	}

@@ -21,11 +21,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.mcmhsj.archersbattle.commands.AdminCommands;
 import net.mcmhsj.archersbattle.commands.Commands;
 import net.mcmhsj.archersbattle.commands.inventory.InventoryListener;
+import net.mcmhsj.archersbattle.commands.inventory.PlayerListener;
+import net.mcmhsj.archersbattle.commands.inventory.WorldListener;
 import net.mcmhsj.archersbattle.managers.ArenaManager;
 import net.mcmhsj.archersbattle.managers.ConfigManager;
 import net.mcmhsj.archersbattle.managers.Database;
 import net.mcmhsj.archersbattle.managers.WeaponItemManager;
 import net.mcmhsj.archersbattle.messages.Messages;
+
+//目前还有的BUG
+//进入竞技场随机重生出错
 
 public class Main extends JavaPlugin
 {
@@ -46,11 +51,13 @@ public class Main extends JavaPlugin
 					config.load(a);
 					Arena arena=new Arena(config.getString("world"));
 					List<Location> locations=new ArrayList<Location>();
-					Set<String> path=config.getKeys(false);
-					for(String x:path)
+					Set<String> keys=config.getKeys(false);
+					for(String x:keys)
 					{
-						Location loc=(Location)config.get("Locations."+x);
-						locations.add(loc);
+						if(x.startsWith("loc"))
+						{
+							locations.add((Location)config.get(x));
+						}
 					}
 					arena.setSpawnLocations(locations);
 					ArenaManager.addArena(arena);
@@ -68,6 +75,9 @@ public class Main extends JavaPlugin
 		Bukkit.getPluginCommand("ab").setExecutor(new Commands());
 		Bukkit.getPluginCommand("abadmin").setExecutor(new AdminCommands());
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
+		Bukkit.getPluginManager().registerEvents(new WorldListener(), this);
+		Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+
 		loadArenas();
 		WeaponItemManager.init();
 		new Messages();

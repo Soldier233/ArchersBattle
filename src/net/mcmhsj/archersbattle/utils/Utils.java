@@ -1,5 +1,6 @@
 package net.mcmhsj.archersbattle.utils;
 
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -24,6 +25,19 @@ public class Utils
 			}
 		}
 		return arena;
+	}
+	public static boolean isInArena(World w)
+	{
+		boolean in=false;
+		for(Arena a:ArenaManager.getArenas())
+		{
+			if(a.getWorldName().equalsIgnoreCase(w.getName()))
+			{
+				in=true;
+				break;
+			}
+		}
+		return in;
 	}
 	public static boolean isInArena(Player p)
 	{
