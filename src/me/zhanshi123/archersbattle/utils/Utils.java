@@ -1,13 +1,13 @@
-package net.mcmhsj.archersbattle.utils;
+package me.zhanshi123.archersbattle.utils;
 
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import net.mcmhsj.archersbattle.Arena;
-import net.mcmhsj.archersbattle.managers.ArenaManager;
-import net.mcmhsj.archersbattle.managers.WeaponItemManager;
+import me.zhanshi123.archersbattle.Arena;
+import me.zhanshi123.archersbattle.managers.ArenaManager;
+import me.zhanshi123.archersbattle.managers.ItemManager;
 
 public class Utils
 {
@@ -57,15 +57,15 @@ public class Utils
 		PlayerInventory inv=p.getInventory();
 		for(int i=0;i<=35;i++)
 		{
-			inv.setItem(i, WeaponItemManager.getForbidden(1));
+			inv.setItem(i, ItemManager.getForbidden(1));
 		}
-		p.updateInventory();
 		for(int i=2;i<=4;i++)
 		{
-			inv.setItem(i, WeaponItemManager.getForbidden(i+1));
+			inv.setItem(i, ItemManager.getForbidden(i+1));
 		}
-		inv.setItem(9, WeaponItemManager.getArrow());
-		inv.setItem(0, WeaponItemManager.getBow());
-		p.updateInventory();
+		inv.setItem(9, ItemManager.getArrow());
+		inv.setItem(0, ItemManager.getBow());
+		p.updateInventory();		
+		p.setLevel(0);
 	}
 }

@@ -1,4 +1,4 @@
-package net.mcmhsj.archersbattle.messages;
+package me.zhanshi123.archersbattle.messages;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import net.mcmhsj.archersbattle.Main;
+import me.zhanshi123.archersbattle.Main;
 
 public class Messages {
 	FileConfiguration config;

@@ -1,4 +1,4 @@
-package net.mcmhsj.archersbattle.listeners;
+package me.zhanshi123.archersbattle.listeners;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -6,9 +6,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-import net.mcmhsj.archersbattle.Arena;
-import net.mcmhsj.archersbattle.messages.Messages;
-import net.mcmhsj.archersbattle.utils.Utils;
+import me.zhanshi123.archersbattle.Arena;
+import me.zhanshi123.archersbattle.messages.Messages;
+import me.zhanshi123.archersbattle.utils.Utils;
 
 public class PlayerListener implements Listener
 {

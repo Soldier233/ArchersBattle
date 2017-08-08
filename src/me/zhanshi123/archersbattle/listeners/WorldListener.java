@@ -1,11 +1,11 @@
-package net.mcmhsj.archersbattle.listeners;
+package me.zhanshi123.archersbattle.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import net.mcmhsj.archersbattle.utils.Utils;
+import me.zhanshi123.archersbattle.utils.Utils;
 
 public class WorldListener implements Listener
 {

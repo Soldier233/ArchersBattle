@@ -1,9 +1,9 @@
-package net.mcmhsj.archersbattle.managers;
+package me.zhanshi123.archersbattle.managers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.mcmhsj.archersbattle.Arena;
+import me.zhanshi123.archersbattle.Arena;
 
 public class ArenaManager {
 	private static List<Arena> arenas=new ArrayList<Arena>();

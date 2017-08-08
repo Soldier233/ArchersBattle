@@ -1,4 +1,4 @@
-package net.mcmhsj.archersbattle.listeners;
+package me.zhanshi123.archersbattle.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,10 +9,10 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import net.mcmhsj.archersbattle.managers.ArenaManager;
-import net.mcmhsj.archersbattle.managers.KitItemManager;
-import net.mcmhsj.archersbattle.managers.WeaponItemManager;
-import net.mcmhsj.archersbattle.utils.Utils;
+import me.zhanshi123.archersbattle.managers.ArenaManager;
+import me.zhanshi123.archersbattle.managers.ItemManager;
+import me.zhanshi123.archersbattle.managers.SkillManager;
+import me.zhanshi123.archersbattle.utils.Utils;
 
 public class InventoryListener implements Listener
 {
@@ -57,12 +57,12 @@ public class InventoryListener implements Listener
 			PlayerInventory inv=p.getInventory();
 			ItemStack item=inv.getItem(slot).clone();
 			item.setAmount(1);
-			if(KitItemManager.isKitSelector(item))
+			if(SkillManager.getInstance().isSkillSelector(item))
 			{
-				//TODO add Kit
-				inv.setItem(2,WeaponItemManager.getForbidden(3));
-				inv.setItem(3,WeaponItemManager.getForbidden(4));
-				inv.setItem(4,WeaponItemManager.getForbidden(5));
+				
+				inv.setItem(2,ItemManager.getForbidden(3));
+				inv.setItem(3,ItemManager.getForbidden(4));
+				inv.setItem(4,ItemManager.getForbidden(5));
 			}
 		}
 		e.setCancelled(true);

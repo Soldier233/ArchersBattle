@@ -1,14 +1,14 @@
-package net.mcmhsj.archersbattle.commands;
+package me.zhanshi123.archersbattle.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.mcmhsj.archersbattle.Arena;
-import net.mcmhsj.archersbattle.managers.ArenaManager;
-import net.mcmhsj.archersbattle.messages.Messages;
-import net.mcmhsj.archersbattle.utils.Utils;
+import me.zhanshi123.archersbattle.Arena;
+import me.zhanshi123.archersbattle.managers.ArenaManager;
+import me.zhanshi123.archersbattle.messages.Messages;
+import me.zhanshi123.archersbattle.utils.Utils;
 
 public class Commands implements CommandExecutor{
 	@Override

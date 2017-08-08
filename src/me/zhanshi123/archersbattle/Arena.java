@@ -1,4 +1,4 @@
-package net.mcmhsj.archersbattle;
+package me.zhanshi123.archersbattle;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,9 +15,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import net.mcmhsj.archersbattle.managers.ArenaManager;
-import net.mcmhsj.archersbattle.messages.Messages;
-import net.mcmhsj.archersbattle.utils.Utils;
+import me.zhanshi123.archersbattle.managers.ArenaManager;
+import me.zhanshi123.archersbattle.messages.Messages;
+import me.zhanshi123.archersbattle.utils.Utils;
 
 public class Arena
 {
@@ -149,7 +149,7 @@ public class Arena
 		}
 		else
 		{
-			int index=random.nextInt(spawnLocations.size()+1);
+			int index=random.nextInt(spawnLocations.size());
 			return spawnLocations.get(index);
 		}
 	}

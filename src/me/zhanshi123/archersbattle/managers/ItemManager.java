@@ -1,11 +1,11 @@
-package net.mcmhsj.archersbattle.managers;
+package me.zhanshi123.archersbattle.managers;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class WeaponItemManager {
+public class ItemManager {
 	static ItemStack forbidden=new ItemStack(Material.STAINED_GLASS_PANE,1,(short)14);
 	static ItemStack arrow= new ItemStack(Material.ARROW);
 	static ItemStack bow= new ItemStack(Material.BOW);

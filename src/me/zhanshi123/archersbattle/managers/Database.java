@@ -1,4 +1,4 @@
-package net.mcmhsj.archersbattle.managers;
+package me.zhanshi123.archersbattle.managers;
 
 import java.sql.Connection;
 import java.sql.Statement;

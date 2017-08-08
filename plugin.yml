@@ -1,6 +1,6 @@
 name: ArchersBattle
 version: 1.0
-main: net.mcmhsj.archersbattle.Main
+main: me.zhanshi123.archersbattle.Main
 author: Soldier
 commands:
   ab:

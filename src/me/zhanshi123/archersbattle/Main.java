@@ -1,4 +1,4 @@
-package net.mcmhsj.archersbattle;
+package me.zhanshi123.archersbattle;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,18 +16,20 @@ import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.mcmhsj.archersbattle.commands.AdminCommands;
-import net.mcmhsj.archersbattle.commands.Commands;
-import net.mcmhsj.archersbattle.listeners.InventoryListener;
-import net.mcmhsj.archersbattle.listeners.PlayerListener;
-import net.mcmhsj.archersbattle.listeners.WorldListener;
-import net.mcmhsj.archersbattle.managers.ArenaManager;
-import net.mcmhsj.archersbattle.managers.ConfigManager;
-import net.mcmhsj.archersbattle.managers.Database;
-import net.mcmhsj.archersbattle.managers.WeaponItemManager;
-import net.mcmhsj.archersbattle.messages.Messages;
+import me.zhanshi123.archersbattle.commands.AdminCommands;
+import me.zhanshi123.archersbattle.commands.Commands;
+import me.zhanshi123.archersbattle.listeners.InventoryListener;
+import me.zhanshi123.archersbattle.listeners.PlayerListener;
+import me.zhanshi123.archersbattle.listeners.WorldListener;
+import me.zhanshi123.archersbattle.managers.ArenaManager;
+import me.zhanshi123.archersbattle.managers.ConfigManager;
+import me.zhanshi123.archersbattle.managers.Database;
+import me.zhanshi123.archersbattle.managers.ItemManager;
+import me.zhanshi123.archersbattle.managers.SkillManager;
+import me.zhanshi123.archersbattle.messages.Messages;
 
 //目前还有的BUG
 //进入竞技场随机重生出错
@@ -68,6 +70,7 @@ public class Main extends JavaPlugin
 		}
 	}
 	
+	
 	public void onEnable()
 	{
 		Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §a弓箭手大作战正在加载中..");
@@ -79,7 +82,8 @@ public class Main extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 
 		loadArenas();
-		WeaponItemManager.init();
+		ItemManager.init();
+		new SkillManager();
 		new Messages();
 		new ConfigManager(this);
 		Database db=null;
@@ -102,6 +106,11 @@ public class Main extends JavaPlugin
 		for(Arena arena:arenas)
 		{
 			arena.saveFile();
+			for(Player p:arena.getPlayers())
+			{
+				arena.removePlayer(p);
+				p.sendMessage(Messages.prefix+Messages.LeavedArena);
+			}
 		}
 		Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §a竞技场保存完成!");
 
