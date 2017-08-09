@@ -16,7 +16,7 @@ import me.zhanshi123.archersbattle.Main;
 
 public class Messages {
 	FileConfiguration config;
-	public static String prefix,SpawnLocationsNotFound,SpawnAdded,PlayersOnly,ArenasBelow,NotInArena,LeavedArena,AlreadyInArena,JoinedArena,AreanNotFound,ArenaAlreadyExists,ArenaCreated;
+	public static String prefix,XpGenAdded,LevelUp,SpawnLocationsNotFound,SpawnAdded,PlayersOnly,ArenasBelow,NotInArena,LeavedArena,AlreadyInArena,JoinedArena,AreanNotFound,ArenaAlreadyExists,ArenaCreated;
 	public Messages()
 	{
 		File f=new File(Main.getInstance().getDataFolder(),"messages.yml");
@@ -46,7 +46,9 @@ public class Messages {
 			config.set("commands.ArenasBelow", "§a以下为已加载的竞技场  分别对应 竞技场 游戏人数");
 			config.set("commands.PlayersOnly", "§a该命令不能由控制台执行");
 			config.set("commands.SpawnAdded", "§a重生点已添加");
+			config.set("commands.XpGenAdded", "§a经验生成点已添加");
 			config.set("ingame.SpawnLocationsNotFound", "§a未设置任何重生点");
+			config.set("ingame.LevelUp", "§a你升级啦！赶快直接用数字键选择你想要的技能吧!");
 
 			try {
 				config.save(f);
@@ -66,5 +68,7 @@ public class Messages {
 		PlayersOnly=config.getString("commands.PlayersOnly");
 		SpawnAdded=config.getString("commands.SpawnAdded");
 		SpawnLocationsNotFound=config.getString("ingame.SpawnLocationsNotFound");
+		LevelUp=config.getString("ingame.LevelUp");
+		XpGenAdded=config.getString("commands.XpGenAdded");
 	}
 }

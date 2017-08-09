@@ -40,4 +40,10 @@ public class ConfigManager {
 	{
 		return config.getString("MySQL.password");
 	}
+	
+	public int getMaxLevel()
+	{
+		return config.getInt("Game.MaxLevel");
+	}
+	
 }

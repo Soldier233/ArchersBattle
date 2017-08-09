@@ -20,7 +20,7 @@ public class WorldListener implements Listener
 		{
 			return;
 		}
-		if(!Utils.isInArena(e.getBlock().getWorld()))
+		if(!Utils.isArenaWorld(e.getBlock().getWorld()))
 		{
 			return;
 		}
@@ -41,7 +41,7 @@ public class WorldListener implements Listener
 		{
 			return;
 		}
-		if(!Utils.isInArena(e.getBlock().getWorld()))
+		if(!Utils.isArenaWorld(e.getBlock().getWorld()))
 		{
 			return;
 		}

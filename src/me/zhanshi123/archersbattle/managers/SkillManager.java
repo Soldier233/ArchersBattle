@@ -23,6 +23,11 @@ public class SkillManager {
 	//Basic Methods End
 	private List<Skill> skills=new ArrayList<Skill>();
 
+	public List<Skill> getSkills()
+	{
+		return skills;
+	}
+	
 	public void register(Skill skill)
 	{
 		skills.add(skill);
@@ -47,12 +52,31 @@ public class SkillManager {
 		boolean result=false;
 		for(Skill s:skills)
 		{
-			if(s.getSelector().equals(item))
+			if(s.getSelector().isSimilar(item))
 			{
 				result=true;
 				break;
 			}
 		}
 		return result;
+	}
+	
+	public Skill getSkillBySelector(ItemStack item)
+	{
+		Skill result=null;
+		for(Skill s:skills)
+		{
+			ItemStack skill=s.getSelector();
+			if(skill.isSimilar(item))
+			{
+				result=s;
+			}
+		}
+		return result;
+	}
+	
+	public List<Skill> getRandomSkills()
+	{
+		return null;
 	}
 }

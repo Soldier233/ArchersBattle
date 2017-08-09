@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import me.zhanshi123.archersbattle.Arena;
@@ -28,6 +29,28 @@ public class PlayerListener implements Listener
 			{
 				e.setRespawnLocation(loc);
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onLevelChange(PlayerLevelChangeEvent e)
+	{
+		if(!Utils.isInArena(e.getPlayer()))
+		{
+			return;
+		}
+		if(e.getNewLevel()==0)
+		{
+			return;
+		}
+		if(e.getNewLevel()>30)
+		{
+			e.getPlayer().setLevel(30);
+		}
+		else
+		{
+			Player p=e.getPlayer();
+			Utils.flushSkillSelection(p);
 		}
 	}
 }

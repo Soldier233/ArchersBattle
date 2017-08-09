@@ -1,10 +1,7 @@
 package me.zhanshi123.archersbattle;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,6 +10,7 @@ import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -30,9 +28,8 @@ import me.zhanshi123.archersbattle.managers.Database;
 import me.zhanshi123.archersbattle.managers.ItemManager;
 import me.zhanshi123.archersbattle.managers.SkillManager;
 import me.zhanshi123.archersbattle.messages.Messages;
+import me.zhanshi123.archersbattle.skill.skills.Sword;
 
-//目前还有的BUG
-//进入竞技场随机重生出错
 
 public class Main extends JavaPlugin
 {
@@ -53,15 +50,31 @@ public class Main extends JavaPlugin
 					config.load(a);
 					Arena arena=new Arena(config.getString("world"));
 					List<Location> locations=new ArrayList<Location>();
-					Set<String> keys=config.getKeys(false);
-					for(String x:keys)
+					List<XpGen> xpgens=new ArrayList<XpGen>();
+					if(config.isConfigurationSection("spawnLocations"))
 					{
-						if(x.startsWith("loc"))
+						ConfigurationSection locs=config.getConfigurationSection("spawnLocations");
+						Set<String> keys=locs.getKeys(false);
+						for(String x:keys)
 						{
-							locations.add((Location)config.get(x));
+							locations.add((Location)config.get("spawnLocations."+x));
 						}
+						arena.setSpawnLocations(locations);
 					}
-					arena.setSpawnLocations(locations);
+					if(config.isConfigurationSection("xpGenerators"))
+					{
+						ConfigurationSection gens=config.getConfigurationSection("xpGenerators");
+						Set<String> keys=gens.getKeys(false);
+						for(String x:keys)
+						{
+							String path="xpGenerators."+x;
+							int interval=config.getInt(path+".interval");
+							Location loc=(Location)config.get(path+".location");
+							XpGen gen=new XpGen(loc,interval);
+							xpgens.add(gen);
+						}
+						arena.setXpGenerators(xpgens);
+					}
 					ArenaManager.addArena(arena);
 				} catch (IOException | InvalidConfigurationException e) {
 					e.printStackTrace();
@@ -80,10 +93,10 @@ public class Main extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
 		Bukkit.getPluginManager().registerEvents(new WorldListener(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
-
+		new SkillManager();
+		loadSkills();
 		loadArenas();
 		ItemManager.init();
-		new SkillManager();
 		new Messages();
 		new ConfigManager(this);
 		Database db=null;
@@ -99,6 +112,7 @@ public class Main extends JavaPlugin
 			Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §c数据库初始化失败，停止加载");
 			setEnabled(false);
 		}
+		Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §a加载完成!加载了"+SkillManager.getInstance().getSkills().size()+"个技能");
 	}
 	public void onDisable()
 	{
@@ -113,7 +127,10 @@ public class Main extends JavaPlugin
 			}
 		}
 		Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §a竞技场保存完成!");
-
 	}
 	
+	public void loadSkills()
+	{
+		new Sword("长剑").register();
+	}
 }

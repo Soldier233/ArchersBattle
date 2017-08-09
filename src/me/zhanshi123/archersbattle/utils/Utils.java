@@ -8,6 +8,7 @@ import org.bukkit.inventory.PlayerInventory;
 import me.zhanshi123.archersbattle.Arena;
 import me.zhanshi123.archersbattle.managers.ArenaManager;
 import me.zhanshi123.archersbattle.managers.ItemManager;
+import me.zhanshi123.archersbattle.managers.SkillManager;
 
 public class Utils
 {
@@ -26,7 +27,7 @@ public class Utils
 		}
 		return arena;
 	}
-	public static boolean isInArena(World w)
+	public static boolean isArenaWorld(World w)
 	{
 		boolean in=false;
 		for(Arena a:ArenaManager.getArenas())
@@ -67,5 +68,12 @@ public class Utils
 		inv.setItem(0, ItemManager.getBow());
 		p.updateInventory();		
 		p.setLevel(0);
+	}
+	public static void flushSkillSelection(Player p)
+	{
+		PlayerInventory inv=p.getInventory();
+		ItemStack item=SkillManager.getInstance().getSkillByName("³¤½£").getSelector();
+		item.setAmount(3);
+		inv.setItem(2,item);
 	}
 }

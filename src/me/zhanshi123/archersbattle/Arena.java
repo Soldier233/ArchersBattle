@@ -26,6 +26,7 @@ public class Arena
 	String worldName;
 	List<Location> spawnLocations=new ArrayList<Location>();
 	List<Player> players=new ArrayList<Player>();
+	List<XpGen> xpGenerators=new ArrayList<XpGen>();
 	public Arena(String worldName)
 	{
 		this.worldName=worldName;
@@ -60,6 +61,18 @@ public class Arena
 	public List<Location> getSpawnLocations()
 	{
 		return spawnLocations;
+	}
+	public void addXpGenerators(XpGen g)
+	{
+		xpGenerators.add(g);
+	}
+	public void setXpGenerators(List<XpGen> list)
+	{
+		this.xpGenerators=list;
+	}
+	public List<XpGen> getXpGenerators()
+	{
+		return xpGenerators;
 	}
 	public void addPlayer(Player p)
 	{
@@ -103,17 +116,46 @@ public class Arena
 	{
 		try {
 			file.set("world", worldName);
-			int i=0;
-			for(Location loc:spawnLocations)
 			{
-				i++;
-				file.set("loc"+i, loc);
+				int i=0;
+				for(Location loc:spawnLocations)
+				{
+					i++;
+					file.set("spawnLocations."+i, loc);
+				}
+			}
+//----------------------------------------------------------
+			{
+				int i=0;
+				for(XpGen g:xpGenerators)
+				{
+					i++;
+					file.set("xpGenerators."+i+".interval", g.getInterval());
+					file.set("xpGenerators."+i+".location", g.getLocation());
+				}
 			}
 			file.save(f);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public Location getRandomSpawnLocation()
+	{
+		Random random=new Random();
+		if(spawnLocations.size()==0)
+		{
+			return null;
+		}
+		else
+		{
+			int index=random.nextInt(spawnLocations.size());
+			return spawnLocations.get(index);
+		}
+	}
+	
+	
+	//static methods below
 	public static Arena valueOf(String name)
 	{
 		Arena ar=null;
@@ -139,18 +181,5 @@ public class Arena
 			}
 		}
 		return contains;
-	}
-	public Location getRandomSpawnLocation()
-	{
-		Random random=new Random();
-		if(spawnLocations.size()==0)
-		{
-			return null;
-		}
-		else
-		{
-			int index=random.nextInt(spawnLocations.size());
-			return spawnLocations.get(index);
-		}
 	}
 }

@@ -13,11 +13,9 @@ public abstract class Skill {
 	* 
 	* @author Soldier 
 	*/
-	public Skill(String skillName,ItemStack show,ItemStack selector)
+	public Skill(String skillName)
 	{
-		this.show=show;
 		this.skillName=skillName;
-		this.selector=show;
 	}
 	
 	public String getName()
@@ -31,5 +29,13 @@ public abstract class Skill {
 	public ItemStack getSelector()
 	{
 		return selector;
+	}
+	public void setShow(ItemStack show)
+	{
+		this.show=show;
+	}
+	public void setSelector(ItemStack selector)
+	{
+		this.selector=selector;
 	}
 }
