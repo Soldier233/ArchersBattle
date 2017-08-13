@@ -16,7 +16,7 @@ import me.zhanshi123.archersbattle.Main;
 
 public class Messages {
 	FileConfiguration config;
-	public static String prefix,XpGenAdded,LevelUp,SpawnLocationsNotFound,SpawnAdded,PlayersOnly,ArenasBelow,NotInArena,LeavedArena,AlreadyInArena,JoinedArena,AreanNotFound,ArenaAlreadyExists,ArenaCreated;
+	public static String prefix,Cooldown,XpGenAdded,LevelUp,SpawnLocationsNotFound,SpawnAdded,PlayersOnly,ArenasBelow,NotInArena,LeavedArena,AlreadyInArena,JoinedArena,AreanNotFound,ArenaAlreadyExists,ArenaCreated;
 	public Messages()
 	{
 		File f=new File(Main.getInstance().getDataFolder(),"messages.yml");
@@ -49,6 +49,7 @@ public class Messages {
 			config.set("commands.XpGenAdded", "§a经验生成点已添加");
 			config.set("ingame.SpawnLocationsNotFound", "§a未设置任何重生点");
 			config.set("ingame.LevelUp", "§a你升级啦！赶快直接用数字键选择你想要的技能吧!");
+			config.set("ingame.Cooldown", "§a对不起，请等待%time%毫秒");
 
 			try {
 				config.save(f);
@@ -70,5 +71,6 @@ public class Messages {
 		SpawnLocationsNotFound=config.getString("ingame.SpawnLocationsNotFound");
 		LevelUp=config.getString("ingame.LevelUp");
 		XpGenAdded=config.getString("commands.XpGenAdded");
+		Cooldown=config.getString("ingame.Cooldown");
 	}
 }

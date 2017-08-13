@@ -94,7 +94,7 @@ public class AdminCommands implements CommandExecutor
 					return true;
 				}
 				arena=Arena.valueOf(worldName);
-				arena.addXpGenerators(new XpGen(loc,interval*20));
+				arena.addXpGenerators(new XpGen(loc,interval));
 				sender.sendMessage(Messages.prefix+Messages.XpGenAdded);
 				break;
 			default:

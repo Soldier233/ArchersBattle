@@ -72,8 +72,12 @@ public class Utils
 	public static void flushSkillSelection(Player p)
 	{
 		PlayerInventory inv=p.getInventory();
-		ItemStack item=SkillManager.getInstance().getSkillByName("≥§Ω£").getSelector();
+		ItemStack item=SkillManager.getInstance().getSkillByName(" ØΩ£").getSelector();
 		item.setAmount(3);
 		inv.setItem(2,item);
+
+		item=SkillManager.getInstance().getSkillByName("ª«Ú ı").getSelector();
+		item.setAmount(4);
+		inv.setItem(3,item);
 	}
 }

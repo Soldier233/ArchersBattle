@@ -21,18 +21,23 @@ import me.zhanshi123.archersbattle.commands.AdminCommands;
 import me.zhanshi123.archersbattle.commands.Commands;
 import me.zhanshi123.archersbattle.listeners.InventoryListener;
 import me.zhanshi123.archersbattle.listeners.PlayerListener;
+import me.zhanshi123.archersbattle.listeners.ProjectileListener;
 import me.zhanshi123.archersbattle.listeners.WorldListener;
 import me.zhanshi123.archersbattle.managers.ArenaManager;
 import me.zhanshi123.archersbattle.managers.ConfigManager;
+import me.zhanshi123.archersbattle.managers.CooldownManager;
 import me.zhanshi123.archersbattle.managers.Database;
 import me.zhanshi123.archersbattle.managers.ItemManager;
 import me.zhanshi123.archersbattle.managers.SkillManager;
+import me.zhanshi123.archersbattle.managers.XpManager;
 import me.zhanshi123.archersbattle.messages.Messages;
 import me.zhanshi123.archersbattle.skill.skills.Sword;
+import me.zhanshi123.archersbattle.skill.skills.FireBall;
 
 
 public class Main extends JavaPlugin
 {
+	
 	private static Main instance;
 	public static Main getInstance()
 	{
@@ -93,12 +98,15 @@ public class Main extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
 		Bukkit.getPluginManager().registerEvents(new WorldListener(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+		Bukkit.getPluginManager().registerEvents(new ProjectileListener(), this);
 		new SkillManager();
 		loadSkills();
 		loadArenas();
 		ItemManager.init();
 		new Messages();
 		new ConfigManager(this);
+		new CooldownManager();
+		/**
 		Database db=null;
 		try {
 			db=new Database(DriverManager.getConnection(ConfigManager.getConfigManager().getMySQLAddress(),
@@ -112,6 +120,8 @@ public class Main extends JavaPlugin
 			Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §c数据库初始化失败，停止加载");
 			setEnabled(false);
 		}
+		**/
+		new XpManager();
 		Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §a加载完成!加载了"+SkillManager.getInstance().getSkills().size()+"个技能");
 	}
 	public void onDisable()
@@ -126,11 +136,13 @@ public class Main extends JavaPlugin
 				p.sendMessage(Messages.prefix+Messages.LeavedArena);
 			}
 		}
+		Bukkit.getScheduler().cancelTasks(Main.getInstance());
 		Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §a竞技场保存完成!");
 	}
 	
 	public void loadSkills()
 	{
-		new Sword("长剑").register();
+		new Sword("石剑").register();
+		new FireBall("火球术").register();
 	}
 }

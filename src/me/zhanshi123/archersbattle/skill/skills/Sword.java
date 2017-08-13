@@ -19,17 +19,13 @@ public class Sword extends Skill{
 	{
 		ItemStack selector=new ItemStack(Material.STONE_SWORD);
 		ItemMeta im=selector.getItemMeta();
-		im.setDisplayName("§a长剑");
-		im.setLore(Arrays.asList(new String[]{
-			"§e§l§m            ",
-				"§b想用近战来砍人?"
-		}));
+		im.setDisplayName("§a石剑");
 		selector.setItemMeta(im);
 		this.setSelector(selector);
 		
 		ItemStack show=new ItemStack(Material.STONE_SWORD);
 		im=show.getItemMeta();
-		im.setDisplayName("§a长剑");
+		im.setDisplayName("§a石剑");
 		im.spigot().setUnbreakable(true);
 		show.setItemMeta(im);
 		this.setShow(show);

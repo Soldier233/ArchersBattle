@@ -61,6 +61,20 @@ public class SkillManager {
 		return result;
 	}
 	
+	public Skill getSkillByShow(ItemStack item)
+	{
+		Skill result=null;
+		for(Skill s:skills)
+		{
+			ItemStack skill=s.getShow();
+			if(skill.isSimilar(item))
+			{
+				result=s;
+			}
+		}
+		return result;
+	}
+	
 	public Skill getSkillBySelector(ItemStack item)
 	{
 		Skill result=null;
