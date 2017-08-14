@@ -1,9 +1,8 @@
 package me.zhanshi123.archersbattle.skill.skills;
 
-import java.util.Arrays;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,32 +18,33 @@ import me.zhanshi123.archersbattle.messages.Messages;
 import me.zhanshi123.archersbattle.skill.Skill;
 import me.zhanshi123.archersbattle.utils.Utils;
 
-public class Sword extends Skill implements Listener{
+public class Archer extends Skill implements Listener{
 
-	public Sword(String skillName) {
+	public Archer(String skillName) {
 		super(skillName);
 	}
 	
 	public void register()
 	{
-		ItemStack selector=new ItemStack(Material.WOOD_SWORD);
+		ItemStack selector=new ItemStack(Material.BOW);
 		ItemMeta im=selector.getItemMeta();
-		im.setDisplayName("¡ìaÄ¾½£");
+		im.setDisplayName("¡ìa¹­");
 		selector.setItemMeta(im);
 		this.setSelector(selector);
-		
-		ItemStack show=new ItemStack(Material.WOOD_SWORD);
+		ItemStack show = new ItemStack(Material.BOW);
 		im=show.getItemMeta();
-		im.setDisplayName("¡ìaÄ¾½£");
-		im.spigot().setUnbreakable(true);
+		im.setDisplayName("¡ìa¹­¡ì7(ÓÒ¼üÊ¹ÓÃ)");
 		show.setItemMeta(im);
 		this.setShow(show);
-		SkillManager.getInstance().register(this);
 		Bukkit.getPluginManager().registerEvents(this, Main.getInstance());
+		SkillManager.getInstance().register(this);
 	}
 	
-	public void attack(Player p)
+	public void sendArrow(Player p)
 	{
+		Arrow arrow=p.launchProjectile(Arrow.class);
+		arrow.setVelocity(p.getEyeLocation().getDirection().multiply(2));
+		arrow.setShooter(p);
 		CooldownManager.getInstance().add(p);
 	}
 	
@@ -58,19 +58,18 @@ public class Sword extends Skill implements Listener{
 		Player p=e.getPlayer();
 		if(!CooldownManager.getInstance().exists(p))
 		{
-			attack(p);
+			sendArrow(p);
 		}
 		else
 		{
 			long left=CooldownManager.getInstance().getLeft(p, 3000L);
 			if(left==0)
 			{
-				attack(p);
+				sendArrow(p);
 			}
 			else
 			{
 				p.sendMessage(Messages.prefix+Messages.Cooldown.replace("%time%", String.valueOf(left)));
-				e.setCancelled(true);
 			}
 		}
 	}

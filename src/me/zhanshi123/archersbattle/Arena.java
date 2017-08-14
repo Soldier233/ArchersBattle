@@ -1,13 +1,10 @@
 package me.zhanshi123.archersbattle;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -34,10 +31,7 @@ public class Arena
 		if(!f.exists())
 		{
 			try {
-				f.mkdir();
-				BufferedWriter bw=new BufferedWriter(new FileWriter(f));
-				bw.newLine();
-				bw.close();
+				f.createNewFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

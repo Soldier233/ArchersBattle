@@ -31,7 +31,9 @@ import me.zhanshi123.archersbattle.managers.ItemManager;
 import me.zhanshi123.archersbattle.managers.SkillManager;
 import me.zhanshi123.archersbattle.managers.XpManager;
 import me.zhanshi123.archersbattle.messages.Messages;
+import me.zhanshi123.archersbattle.metrics.Metrics;
 import me.zhanshi123.archersbattle.skill.skills.Sword;
+import me.zhanshi123.archersbattle.skill.skills.Archer;
 import me.zhanshi123.archersbattle.skill.skills.FireBall;
 
 
@@ -46,6 +48,10 @@ public class Main extends JavaPlugin
 	public void loadArenas()
 	{
 		File f=new File(getDataFolder()+"/arenas/");
+		if(!f.exists())
+		{
+			f.mkdirs();
+		}
 		for(File a:f.listFiles())
 		{
 			if(a.getName().endsWith(".yml"))
@@ -122,6 +128,7 @@ public class Main extends JavaPlugin
 		}
 		**/
 		new XpManager();
+		new Metrics(instance);
 		Bukkit.getConsoleSender().sendMessage("§6§lArchersBattle §7>>> §a加载完成!加载了"+SkillManager.getInstance().getSkills().size()+"个技能");
 	}
 	public void onDisable()
@@ -142,7 +149,8 @@ public class Main extends JavaPlugin
 	
 	public void loadSkills()
 	{
-		new Sword("石剑").register();
+		new Sword("木剑").register();
 		new FireBall("火球术").register();
+		new Archer("弓").register();
 	}
 }

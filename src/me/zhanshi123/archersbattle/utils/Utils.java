@@ -1,5 +1,7 @@
 package me.zhanshi123.archersbattle.utils;
 
+import java.util.List;
+
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -9,6 +11,7 @@ import me.zhanshi123.archersbattle.Arena;
 import me.zhanshi123.archersbattle.managers.ArenaManager;
 import me.zhanshi123.archersbattle.managers.ItemManager;
 import me.zhanshi123.archersbattle.managers.SkillManager;
+import me.zhanshi123.archersbattle.skill.Skill;
 
 public class Utils
 {
@@ -64,20 +67,21 @@ public class Utils
 		{
 			inv.setItem(i, ItemManager.getForbidden(i+1));
 		}
-		inv.setItem(9, ItemManager.getArrow());
-		inv.setItem(0, ItemManager.getBow());
+		flushSkillSelection(p);
 		p.updateInventory();		
 		p.setLevel(0);
 	}
 	public static void flushSkillSelection(Player p)
 	{
 		PlayerInventory inv=p.getInventory();
-		ItemStack item=SkillManager.getInstance().getSkillByName(" ØΩ£").getSelector();
-		item.setAmount(3);
-		inv.setItem(2,item);
-
-		item=SkillManager.getInstance().getSkillByName("ª«Ú ı").getSelector();
-		item.setAmount(4);
-		inv.setItem(3,item);
+		List<Skill> skills=SkillManager.getInstance().getRandomSkills();
+		int i=2;
+		for(Skill s:skills)
+		{
+			ItemStack item=s.getSelector();
+			item.setAmount(i+1);
+			inv.setItem(i,item );
+			i++;
+		}
 	}
 }

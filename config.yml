@@ -2,5 +2,6 @@ MySQL:
   address: 'jdbc:mysql://127.0.0.1:3306/minecraft'
   user: 'root'
   password: 'yourpwdhere'
+#预览版中不需要填写
 Game:
-  MaxLevel: 30  
+  MaxLevel: 30

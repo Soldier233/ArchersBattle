@@ -3,6 +3,7 @@ package me.zhanshi123.archersbattle.managers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -89,8 +90,27 @@ public class SkillManager {
 		return result;
 	}
 	
+	private Skill getRandomSkill(List<Skill> ss)
+	{
+		Skill s=this.skills.get(new Random().nextInt(this.skills.size()));
+		if(!ss.contains(s))
+		{
+			return s;
+		}
+		else
+		{
+			return getRandomSkill(ss);
+		}
+			
+	}
+	
 	public List<Skill> getRandomSkills()
 	{
-		return null;
+		List<Skill> skills=new ArrayList<Skill>();
+		for(int i=0;i<=2;i++)
+		{
+			skills.add(getRandomSkill(skills));
+		}
+		return skills;
 	}
 }

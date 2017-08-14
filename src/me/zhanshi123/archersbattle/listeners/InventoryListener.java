@@ -12,6 +12,7 @@ import org.bukkit.inventory.PlayerInventory;
 import me.zhanshi123.archersbattle.managers.ArenaManager;
 import me.zhanshi123.archersbattle.managers.ItemManager;
 import me.zhanshi123.archersbattle.managers.SkillManager;
+import me.zhanshi123.archersbattle.skill.Skill;
 import me.zhanshi123.archersbattle.skill.skills.FireBall;
 import me.zhanshi123.archersbattle.skill.skills.Sword;
 import me.zhanshi123.archersbattle.utils.Utils;
@@ -61,14 +62,8 @@ public class InventoryListener implements Listener
 			item.setAmount(1);
 			if(SkillManager.getInstance().isSkillSelector(item))
 			{
-				if(SkillManager.getInstance().getSkillBySelector(item) instanceof Sword)
-				{
-					inv.setItem(0, SkillManager.getInstance().getSkillByName(" ØΩ£").getShow());
-				}
-				if(SkillManager.getInstance().getSkillBySelector(item) instanceof FireBall)
-				{
-					inv.setItem(0, SkillManager.getInstance().getSkillByName("ª«Ú ı").getShow());
-				}
+				Skill skill=SkillManager.getInstance().getSkillBySelector(item);
+				inv.setItem(0, skill.getShow());
 				inv.setItem(2,ItemManager.getForbidden(3));
 				inv.setItem(3,ItemManager.getForbidden(4));
 				inv.setItem(4,ItemManager.getForbidden(5));
