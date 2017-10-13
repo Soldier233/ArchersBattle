@@ -1,4 +1,4 @@
-﻿package me.zhanshi123.archersbattle.commands;
+package me.zhanshi123.archersbattle.commands;
 
 import me.zhanshi123.archersbattle.Arena;
 import me.zhanshi123.archersbattle.XpGen;

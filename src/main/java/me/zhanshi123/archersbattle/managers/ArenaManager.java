@@ -8,7 +8,7 @@ import java.util.List;
 public class ArenaManager {
     private static List<Arena> arenas = new ArrayList<Arena>();
 
-    //���õľ�����
+
     public static List<Arena> getArenas() {
         return arenas;
     }

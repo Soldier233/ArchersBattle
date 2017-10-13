@@ -1,4 +1,4 @@
-﻿package me.zhanshi123.archersbattle.managers;
+package me.zhanshi123.archersbattle.managers;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

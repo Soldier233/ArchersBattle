@@ -6,17 +6,16 @@ import java.util.HashMap;
 
 public class CooldownManager {
     private static CooldownManager cm = null;
+    HashMap<Player, Long> data = new HashMap<Player, Long>();
 
     public CooldownManager() {
         cm = this;
     }
+    //Basic Methods End
 
     public static CooldownManager getInstance() {
         return cm;
     }
-    //Basic Methods End
-
-    HashMap<Player, Long> data = new HashMap<Player, Long>();
 
     public void add(Player p) {
         if (data.containsKey(p)) {

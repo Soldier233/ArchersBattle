@@ -2,11 +2,9 @@ package me.zhanshi123.archersbattle.skill;
 
 import me.zhanshi123.archersbattle.Main;
 import me.zhanshi123.archersbattle.managers.SkillManager;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.util.Vector;
 
@@ -21,6 +19,23 @@ public abstract class Skill {
         this.skillName = skillName;
     }
 
+    public static Skill getSkillByProjectile(Projectile projectile) {
+        List<MetadataValue> value = projectile.getMetadata("skill_type");
+        Skill s=SkillManager.getInstance().getSkillByName(getMetadataValue(value));
+        return s;
+    }
+
+    private static String getMetadataValue(List<MetadataValue> values) {
+        String text = null;
+        for (MetadataValue v : values) {
+            if (v.getOwningPlugin().getName().equalsIgnoreCase(Main.getInstance().getName())) {
+                text = (String) v.value();
+                break;
+            }
+        }
+        return text;
+    }
+
     public String getName() {
         return skillName;
     }
@@ -31,39 +46,33 @@ public abstract class Skill {
         return show;
     }
 
-    public ItemStack getSelector() {
-        return selector;
-    }
-
     public void setShow(ItemStack show) {
         this.show = show;
+    }
+
+    public ItemStack getSelector() {
+        return selector;
     }
 
     public void setSelector(ItemStack selector) {
         this.selector = selector;
     }
 
-    public void setSkillType(SkillType type) {
-        this.type = type;
-    }
-
     public SkillType getSkillType() {
         return type;
     }
 
-    public static Skill getSkillByProjectile(Projectile projectile){
-        List<MetadataValue> value= projectile.getMetadata("skill_type");
-        return SkillManager.getInstance().getSkillByName(getMetadataValue(value));
+    public void setSkillType(SkillType type) {
+        this.type = type;
     }
 
-    private static String getMetadataValue(List<MetadataValue> values){
-        String text=null;
-        for(MetadataValue v:values){
-            if(v.getOwningPlugin().getName().equalsIgnoreCase(Main.getInstance().getName())){
-                text= (String) v.value();
-                break;
-            }
-        }
-        return text;
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "skillName='" + skillName + '\'' +
+                ", show=" + show +
+                ", selector=" + selector +
+                ", type=" + type +
+                '}';
     }
 }

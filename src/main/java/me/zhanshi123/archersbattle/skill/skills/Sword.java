@@ -1,10 +1,11 @@
-﻿package me.zhanshi123.archersbattle.skill.skills;
+package me.zhanshi123.archersbattle.skill.skills;
 
 import me.zhanshi123.archersbattle.Main;
 import me.zhanshi123.archersbattle.managers.CooldownManager;
 import me.zhanshi123.archersbattle.managers.SkillManager;
 import me.zhanshi123.archersbattle.messages.Messages;
 import me.zhanshi123.archersbattle.skill.Skill;
+import me.zhanshi123.archersbattle.skill.SkillType;
 import me.zhanshi123.archersbattle.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -35,6 +36,7 @@ public class Sword extends Skill implements Listener {
         im.spigot().setUnbreakable(true);
         show.setItemMeta(im);
         this.setShow(show);
+        this.setSkillType(SkillType.ITEM);
         SkillManager.getInstance().register(this);
         Bukkit.getPluginManager().registerEvents(this, Main.getInstance());
     }
@@ -56,7 +58,7 @@ public class Sword extends Skill implements Listener {
         } else {
             long left = CooldownManager.getInstance().getLeft(p, 3000L);
             if (left == 0) {
-                launch(p,null);
+                launch(p, null);
             } else {
                 p.sendMessage(Messages.prefix + Messages.Cooldown.replace("%time%", String.valueOf(left)));
                 e.setCancelled(true);

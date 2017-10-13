@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ProjectileListener implements Listener {
     @EventHandler
-    public void onHit(ProjectileHitEvent e) {
+    public void onHit(final ProjectileHitEvent e) {
         if (!Utils.isArenaWorld(e.getEntity().getWorld())) {
             return;
         }

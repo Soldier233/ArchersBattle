@@ -1,4 +1,4 @@
-﻿package me.zhanshi123.archersbattle.skill.skills;
+package me.zhanshi123.archersbattle.skill.skills;
 
 import me.zhanshi123.archersbattle.Main;
 import me.zhanshi123.archersbattle.managers.CooldownManager;
@@ -17,7 +17,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.util.Vector;
+
+import java.util.List;
 
 public class FireBall extends Skill implements Listener {
 
@@ -42,15 +45,14 @@ public class FireBall extends Skill implements Listener {
     }
 
     @Override
-    public void launch(Player p,Vector vector) {
+    public void launch(Player p, Vector vector) {
         Fireball fb = p.launchProjectile(Fireball.class);
-        if(vector==null){
+        if (vector == null) {
             fb.setVelocity(p.getEyeLocation().getDirection().multiply(2));
-        }
-        else{
+        } else {
             fb.setVelocity(vector);
         }
-        fb.setMetadata("skill_type",new FixedMetadataValue(Main.getInstance(),getName()));
+        fb.setMetadata("skill_type", new FixedMetadataValue(Main.getInstance(), getName()));
         CooldownManager.getInstance().add(p);
     }
 
@@ -62,11 +64,11 @@ public class FireBall extends Skill implements Listener {
             return;
         Player p = e.getPlayer();
         if (!CooldownManager.getInstance().exists(p)) {
-            launch(p,null);
+            launch(p, null);
         } else {
             long left = CooldownManager.getInstance().getLeft(p, 3000L);
             if (left == 0) {
-                launch(p,null);
+                launch(p, null);
             } else {
                 p.sendMessage(Messages.prefix + Messages.Cooldown.replace("%time%", String.valueOf(left)));
             }

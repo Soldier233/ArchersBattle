@@ -42,28 +42,51 @@ public class Arena {
         }
     }
 
-    public void addSpawnLoactions(Location loc) {
-        spawnLocations.add(loc);
+    //static methods below
+    public static Arena valueOf(String name) {
+        Arena ar = null;
+        for (Arena a : ArenaManager.getArenas()) {
+            if (a.getWorldName().equalsIgnoreCase(name)) {
+                ar = a;
+                break;
+            }
+        }
+        return ar;
     }
 
-    public void setSpawnLocations(List<Location> spawnLocations) {
-        this.spawnLocations = spawnLocations;
+    public static boolean containsArena(String name) {
+        boolean contains = false;
+        for (Arena a : ArenaManager.getArenas()) {
+            if (a.getWorldName().equalsIgnoreCase(name)) {
+                contains = true;
+                break;
+            }
+        }
+        return contains;
+    }
+
+    public void addSpawnLoactions(Location loc) {
+        spawnLocations.add(loc);
     }
 
     public List<Location> getSpawnLocations() {
         return spawnLocations;
     }
 
+    public void setSpawnLocations(List<Location> spawnLocations) {
+        this.spawnLocations = spawnLocations;
+    }
+
     public void addXpGenerators(XpGen g) {
         xpGenerators.add(g);
     }
 
-    public void setXpGenerators(List<XpGen> list) {
-        this.xpGenerators = list;
-    }
-
     public List<XpGen> getXpGenerators() {
         return xpGenerators;
+    }
+
+    public void setXpGenerators(List<XpGen> list) {
+        this.xpGenerators = list;
     }
 
     public void addPlayer(Player p) {
@@ -88,12 +111,12 @@ public class Arena {
         p.getInventory().clear();
     }
 
-    public void setWorldName(String name) {
-        this.worldName = name;
-    }
-
     public String getWorldName() {
         return this.worldName;
+    }
+
+    public void setWorldName(String name) {
+        this.worldName = name;
     }
 
     public List<Player> getPlayers() {
@@ -133,29 +156,5 @@ public class Arena {
             int index = random.nextInt(spawnLocations.size());
             return spawnLocations.get(index);
         }
-    }
-
-
-    //static methods below
-    public static Arena valueOf(String name) {
-        Arena ar = null;
-        for (Arena a : ArenaManager.getArenas()) {
-            if (a.getWorldName().equalsIgnoreCase(name)) {
-                ar = a;
-                break;
-            }
-        }
-        return ar;
-    }
-
-    public static boolean containsArena(String name) {
-        boolean contains = false;
-        for (Arena a : ArenaManager.getArenas()) {
-            if (a.getWorldName().equalsIgnoreCase(name)) {
-                contains = true;
-                break;
-            }
-        }
-        return contains;
     }
 }

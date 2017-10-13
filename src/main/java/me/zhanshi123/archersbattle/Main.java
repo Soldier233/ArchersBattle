@@ -1,4 +1,4 @@
-﻿package me.zhanshi123.archersbattle;
+package me.zhanshi123.archersbattle;
 
 import me.zhanshi123.archersbattle.commands.AdminCommands;
 import me.zhanshi123.archersbattle.commands.Commands;
@@ -11,6 +11,7 @@ import me.zhanshi123.archersbattle.messages.Messages;
 import me.zhanshi123.archersbattle.metrics.Metrics;
 import me.zhanshi123.archersbattle.skill.skills.Archer;
 import me.zhanshi123.archersbattle.skill.skills.FireBall;
+import me.zhanshi123.archersbattle.skill.skills.MultiProjectile;
 import me.zhanshi123.archersbattle.skill.skills.Sword;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -119,7 +120,8 @@ public class Main extends JavaPlugin {
         for (Arena arena : arenas) {
             arena.saveFile();
             for (Player p : arena.getPlayers()) {
-                arena.removePlayer(p);
+                Player player=p;
+                arena.removePlayer(player);
                 p.sendMessage(Messages.prefix + Messages.LeavedArena);
             }
         }
@@ -131,5 +133,6 @@ public class Main extends JavaPlugin {
         new Sword("木剑").register();
         new FireBall("火球术").register();
         new Archer("弓").register();
+        new MultiProjectile("前方射出的武器+1").register();
     }
 }

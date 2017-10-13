@@ -1,10 +1,11 @@
-﻿package me.zhanshi123.archersbattle.skill.skills;
+package me.zhanshi123.archersbattle.skill.skills;
 
 import me.zhanshi123.archersbattle.Main;
 import me.zhanshi123.archersbattle.managers.CooldownManager;
 import me.zhanshi123.archersbattle.managers.SkillManager;
 import me.zhanshi123.archersbattle.messages.Messages;
 import me.zhanshi123.archersbattle.skill.Skill;
+import me.zhanshi123.archersbattle.skill.SkillType;
 import me.zhanshi123.archersbattle.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,7 +17,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.util.Vector;
 
 public class Archer extends Skill implements Listener {
@@ -36,6 +36,7 @@ public class Archer extends Skill implements Listener {
         im.setDisplayName("§a弓§7(右键使用)");
         show.setItemMeta(im);
         this.setShow(show);
+        this.setSkillType(SkillType.ITEM);
         Bukkit.getPluginManager().registerEvents(this, Main.getInstance());
         SkillManager.getInstance().register(this);
     }
@@ -43,14 +44,13 @@ public class Archer extends Skill implements Listener {
     @Override
     public void launch(Player p, Vector vector) {
         Arrow arrow = p.launchProjectile(Arrow.class);
-        if(vector==null){
+        if (vector == null) {
             arrow.setVelocity(p.getEyeLocation().getDirection().multiply(2));
-        }
-        else{
+        } else {
             arrow.setVelocity(vector);
         }
         arrow.setShooter(p);
-        arrow.setMetadata("skill_type", new FixedMetadataValue(Main.getInstance(),getName()));
+        arrow.setMetadata("skill_type", new FixedMetadataValue(Main.getInstance(), getName()));
         CooldownManager.getInstance().add(p);
     }
 
@@ -62,11 +62,11 @@ public class Archer extends Skill implements Listener {
             return;
         Player p = e.getPlayer();
         if (!CooldownManager.getInstance().exists(p)) {
-            launch(p,null);
+            launch(p, null);
         } else {
             long left = CooldownManager.getInstance().getLeft(p, 3000L);
             if (left == 0) {
-                launch(p,null);
+                launch(p, null);
             } else {
                 p.sendMessage(Messages.prefix + Messages.Cooldown.replace("%time%", String.valueOf(left)));
             }

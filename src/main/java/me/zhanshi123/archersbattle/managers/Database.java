@@ -13,6 +13,10 @@ public class Database {
         db = this;
     }
 
+    public static Database getDatabase() {
+        return db;
+    }
+
     public boolean init() {
         boolean success = false;
         try {
@@ -23,10 +27,6 @@ public class Database {
             e.printStackTrace();
         }
         return success;
-    }
-
-    public static Database getDatabase() {
-        return db;
     }
 
 }

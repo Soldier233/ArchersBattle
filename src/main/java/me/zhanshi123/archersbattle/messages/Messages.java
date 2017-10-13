@@ -1,4 +1,4 @@
-﻿package me.zhanshi123.archersbattle.messages;
+package me.zhanshi123.archersbattle.messages;
 
 import me.zhanshi123.archersbattle.Main;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Messages {
-    FileConfiguration config;
     public static String prefix, Cooldown, XpGenAdded, LevelUp, SpawnLocationsNotFound, SpawnAdded, PlayersOnly, ArenasBelow, NotInArena, LeavedArena, AlreadyInArena, JoinedArena, AreanNotFound, ArenaAlreadyExists, ArenaCreated;
+    FileConfiguration config;
 
     public Messages() {
         File f = new File(Main.getInstance().getDataFolder(), "messages.yml");

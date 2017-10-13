@@ -9,6 +9,8 @@ import java.util.Random;
 
 public class SkillManager {
     private static SkillManager sm = null;
+    //Basic Methods End
+    private List<Skill> skills = new ArrayList<Skill>();
 
     public SkillManager() {
         sm = this;
@@ -17,9 +19,6 @@ public class SkillManager {
     public static SkillManager getInstance() {
         return sm;
     }
-
-    //Basic Methods End
-    private List<Skill> skills = new ArrayList<Skill>();
 
     public List<Skill> getSkills() {
         return skills;
@@ -31,7 +30,6 @@ public class SkillManager {
 
     public Skill getSkillByName(String name) {
         Skill sr = null;
-        ;
         for (Skill skill : skills) {
             if (skill.getName().equalsIgnoreCase(name)) {
                 sr = skill;
@@ -58,6 +56,7 @@ public class SkillManager {
             ItemStack skill = s.getShow();
             if (skill.isSimilar(item)) {
                 result = s;
+                break;
             }
         }
         return result;

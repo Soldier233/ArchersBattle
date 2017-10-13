@@ -6,9 +6,9 @@ import org.bukkit.plugin.Plugin;
 import java.io.File;
 
 public class ConfigManager {
-    private Plugin p;
-    FileConfiguration config;
     private static ConfigManager cm = null;
+    FileConfiguration config;
+    private Plugin p;
 
     public ConfigManager(Plugin plugin) {
         p = plugin;

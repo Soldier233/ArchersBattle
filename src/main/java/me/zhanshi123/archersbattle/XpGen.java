@@ -11,19 +11,19 @@ public class XpGen {
         this.loc = loc;
     }
 
-    public void setInterval(int interval) {
-        this.interval = interval;
+    public Location getLocation() {
+        return loc;
     }
 
     public void setLocation(Location loc) {
         this.loc = loc;
     }
 
-    public Location getLocation() {
-        return loc;
-    }
-
     public int getInterval() {
         return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
     }
 }
