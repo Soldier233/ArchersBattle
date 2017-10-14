@@ -42,6 +42,10 @@ public abstract class Skill {
 
     public abstract void launch(Player p, Vector vector);
 
+    public void launchList(Player p, List<Vector> vectors){
+
+    };
+
     public ItemStack getShow() {
         return show;
     }

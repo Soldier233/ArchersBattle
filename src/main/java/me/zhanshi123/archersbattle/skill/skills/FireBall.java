@@ -50,9 +50,21 @@ public class FireBall extends Skill implements Listener {
         if (vector == null) {
             fb.setVelocity(p.getEyeLocation().getDirection().multiply(2));
         } else {
-            fb.setVelocity(vector);
+            fb.setVelocity(vector.multiply(2));
         }
         fb.setMetadata("skill_type", new FixedMetadataValue(Main.getInstance(), getName()));
+        CooldownManager.getInstance().add(p);
+    }
+
+    @Override
+    public void launchList(Player p, List<Vector> vectors) {
+        p.sendMessage(String.valueOf(vectors.size()));
+        for(Vector v:vectors){
+            Fireball fb = p.launchProjectile(Fireball.class);
+            fb.setDirection(v.multiply(2));
+            fb.setMetadata("skill_type", new FixedMetadataValue(Main.getInstance(), getName()));
+        }
+
         CooldownManager.getInstance().add(p);
     }
 

@@ -35,13 +35,11 @@ public class MultiProjectile extends Skill implements Listener {
         Map.Entry<Skill, Upgrade> entry=UpgradeManager.getInstance().getEntry(player,this);
         if(entry==null){
             UpgradeManager.getInstance().add(new Upgrade(player,2),this);
-            System.out.println(2);
         }
         else {
             int level = UpgradeManager.getInstance().getUpgrade(player).getLevel();
             UpgradeManager.getInstance().removeUpgrade(player);
             UpgradeManager.getInstance().add(new Upgrade(player, level + 1), this);
-            System.out.println(level+1);
         }
     }
 
@@ -75,44 +73,44 @@ public class MultiProjectile extends Skill implements Listener {
         int level=5;
         Location loc = p.getEyeLocation();
         System.out.println("开始计算发射位置");
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             switch (i) {
                 case 1:
                     continue;
                 case 2:
-                    if(level<=2){
+                    if(level>=2){
                         Location location = loc.clone();
                         location.setYaw((loc.getYaw() - 10) % 180);
-                        vectors.add(location.toVector());
+                        vectors.add(location.getDirection());
                     }
                     continue;
                 case 3:
-                    if(level<=3){
+                    if(level>=3){
                         Location location = loc.clone();
                         location.setYaw((loc.getYaw() + 10) % 180);
-                        vectors.add(location.toVector());
+                        vectors.add(location.getDirection());
                     }
                     continue;
                 case 4:
-                    if(level<=4){
+                    if(level>=4){
                         Location location = loc.clone();
                         location.setYaw((loc.getYaw() - 20) % 180);
-                        vectors.add(location.toVector());
+                        vectors.add(location.getDirection());
                     }
                     continue;
                 case 5:
-                    if(level<=5){
+                    if(level>=5){
                         Location location = loc.clone();
                         location.setYaw((loc.getYaw() + 20) % 180);
-                        vectors.add(location.toVector());
+                        vectors.add(location.getDirection());
                     }
                     continue;
+                default:
+                    break;
             }
         }
         System.out.println("发射");
-        for(Vector v:vectors){
-            System.out.println(v.toString());
-        }
+        skill.launchList(p,vectors);
         System.out.println(vectors.size());
 //        if (entry != null) {
 //            int level = entry.getValue().getLevel();
